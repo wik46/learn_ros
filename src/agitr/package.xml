@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>agitr</name>
+  <version>0.0.0</version>
+  	<description>
+  	An example taken from the Gentle Introduction to ROS textbook
+	</description>
+
+  <maintainer email="wikusjvr@todo.todo">wikusjvr</maintainer>
+  <license>TODO</license>
+
+	<!--Needed for hello.cpp -->
+  	<build_depend>rosc--</build_depend>
+  	<exec_depend>roscpp</exec_depend>
+  		
+	<!-- The fololwing to sets of tags are not needed for hello.cpp-->
+	<build_depend>geometry_msgs</build_depend>
+  	<exec_depend>geometry_msgs</exec_depend>
+	<build_depend>turtlesim</build_depend>
+	<exec_depend>turtlesim</exec_depend>
+	
+	<buildtool_depend>catkin</buildtool_depend>
+</package>

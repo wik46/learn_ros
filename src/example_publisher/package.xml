@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>example_publisher</name>
+  <version>0.0.0</version>
+  <description>The example_publisher package</description>
+
+  <maintainer email="wikusjvr@todo.todo">wikusjvr</maintainer>
+  <license>TODO</license>
+
+     <!-- This is to ensure that caktin has a cpp compiler-->
+     <build_depend>roscpp</build_depend> 
+     <exec_depend>roscpp</exec_depend> 
+     <!-- This is becuase I use the geometry_msgs::Twist class --> 
+     <build_depend>geometry_msgs</build_depend>
+     <exec_depend>geometry_msgs</exec_depend>
+
+     <buildtool_depend>catkin</buildtool_depend>
+
+</package>
