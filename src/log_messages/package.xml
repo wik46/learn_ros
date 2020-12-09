@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>log_messages</name>
+  <version>0.0.0</version>
+  <description>The log_messages package</description>
+
+  <maintainer email="wikus.jvr6@gmail.com">wikusjvr</maintainer>
+
+
+  <license>MIT</license>
+
+  <!--   Note that this is equivalent to the following: -->
+     <build_depend>roscpp</build_depend> 
+     <exec_depend>roscpp</exec_depend> 
+  
+     <buildtool_depend>catkin</buildtool_depend>
+
+</package>

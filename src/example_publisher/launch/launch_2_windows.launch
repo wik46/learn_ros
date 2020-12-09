@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!-- One problem with roslaunch is that it spans all the nodes in one terminal window.-->
+<!-- This program shows how to ensure that is create more than one-->
+
+
+<!-- 
+	using the 'xterm -e ...'
+	- xterm command: Tells the program to create new terminal window.
+	- -e argument: Tells the program to execute the ... in a new terminal window.
+
+-->
+<launch>
+	<!-- 
+		At the heart of a launch file is the node elements.
+		Each names a single node. The node will follow the following format.
+		<node
+			pkg="package-name" /*This specifies the package name*/
+			type="executable-name" /* This specifies the executable*/
+			name="node_name" /*This will overide any name given by ros::init()*/
+			launch-prefix="xterm -e" /*If you add this to a node tag, you will
+						launch that node in its own terminal window.*/ 
+		/>
+	-->
+
+	<!-- We use a launch file when we don't want to start various nodes seperately.-->
+	<!-- Let say our program needs five nodes, we can you a launch file to start them at once-->
+	<!-- 1. First node that I want to start-->
+	<node
+		pkg="turtlesim"	
+		type="turtlesim_node"
+		name="turtlesim"
+		respawn="true"
+	/>
+	<!-- 2. This will spawn the turtle_teleop_key node to take user input-->
+	<node
+		pkg="turtlesim"
+		type="turtle_teleop_key"
+		name="teleop_key"
+	>
+	</node>
+	
+	<!-- 3. This starts my user-defined program that publishes -->
+	<!-- Using roslaunch, the default output is logged to a file, therefore
+		you need to specify where to output the data.-->
+	<node
+		pkg="example_publisher"
+		type="publish_velocity"
+		name="pub_vel"
+		output="screen"
+		launch-prefix="xterm -e"
+	/>
+</launch>

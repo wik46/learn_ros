@@ -6,25 +6,26 @@ Description: This is a step by step guide
 		on how to compile a cpp file with the catkin build
 		system.
 
-	1. Desclaring Dependancies
+	1. Declaring Dependancies: Modify package.xml and CMakelist.txt
 		- for hello.cpp
 			a) Add the roscpp client library in the CmakeList.txt
 			   and package.xml file. This ensure that catkin 
 			   provides a C++ compiler.
-			b) Add a run_depend and build_depend tag 'roscpp'.
+			b) Inside package.xml add a run_depend and build_depend tag 'roscpp'.
 			   You program will compile without it but
 			   if you export the package to another system that does
 			   no have it they wont be able to compile.	
 
-	2. Declaring Executables
+	2. Declaring Executables: modify CMakelist.txt
 		2 Places where you need to modify inside CmakeList.txt.
 		1- You need to tell Cmake the name of the executables
 		   as well as all the source files needed to build it.
 		2- You need to specify all the libraries like 'roscpp'
 		   need from find_package()
-	
+		3- Add 'catkin_package()' to the CMakelist.txt file of the package.
+
 	3. Building the workspace.	
 		- Run the command 'catkin_make' inside the home directory
 		  of you workspace.
 	** Remember to source you devel/setup.bash of the package.
-	4.
+	4. Run your package.

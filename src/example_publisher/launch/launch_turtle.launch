@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!--Format to use roslaunch: 'roslaunch package-name file.launch'  -->
+<!-- This program describes the basic structure of a launch file-->
+<!-- You need an root element,' launch'-->
+<!-- Downside of using roslaunch, is that all the programs will live in 1 terminal window.-->
+
+<launch>
+	<!-- 
+		At the heart of a launch file is the node elements.
+		Each names a single node. The node will follow the following format.
+		<node
+			pkg="package-name" /*This specifies the package name*/
+			type="executable-name" /* This specifies the executable*/
+			name="node_name" /*This will overide any name given by ros::init()*/
+			ouput="screen" /*By defualt, nodes launched with roslaunch gets
+					outputted to a log file instead of the screen.
+					This overides that behaviour.*/
+			respawn="true"/*Roslaunch monitors the state of all the nodes,
+					this parameter tells ros to relaunch a node if it has failed*/
+			required="true" /*When the required node terminates, ros
+					responds by killing all the other nodes.*/
+		/>
+	-->
+
+	<!-- We use a launch file when we don't want to start various nodes seperately.-->
+	<!-- Let say our program needs five nodes, we can you a launch file to start them at once-->
+	<!-- 1. First node that I want to start-->
+	<!-- the 'respawn' parameter tells ros that if this node terminates, it should restart 
+		automatically-->
+	<node
+		pkg="turtlesim"	
+		type="turtlesim_node"
+		name="turtlesim"
+		respawn="true"
+	></node>
+	<!-- 2. This launches the node used to send cmd_vel messages to the turtle-->
+	<!-- The 'required' parameter tells ros that if this node is terminated, it
+		should terminate all the other nodes as well. -->
+	<node
+		pkg="turtlesim"
+		type="turtle_teleop_key"
+		name="teleop_key"
+		required="true"
+	></node>
+</launch>

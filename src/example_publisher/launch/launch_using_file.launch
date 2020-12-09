@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!-- This launch file uses the include element to launch other files-->
+<!-- There are two ways to specify this.-->
+<!-- 1. You can provide the entire path to the launch file -->
+<!-- 2. You can use $(find package-name)/launch-file.launch -->
+
+<!-- In this file I am going launch gazebo with an empty world-->
+
+<!-- This will launch the empty_world.launch file-->
+<launch>
+	<include
+		file="$(find gazebo_ros)/launch/empty_world.launch" 
+	/>
+	<node
+		pkg="gazebo_ros"
+		type="gazebo"
+		name="my_custom_gazebo_launch"
+	/>
+
+</launch>
