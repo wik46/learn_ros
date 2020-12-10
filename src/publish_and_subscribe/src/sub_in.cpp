@@ -18,6 +18,7 @@
 #include <ros/ros.h>
 // This is to gain access to the message type I wnat to subcribe to.
 #include <turtlesim/Pose.h>
+// Note that this program is not subcribing to this topic yet.
 // 2nd message type that the node will subscribe to.
 #include <geometry_msgs/Twist.h>
 
