@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>publish_and_subscribe</name>
+  <version>0.0.0</version>
+  <description>The publish_and_subscribe package</description>
+
+  <maintainer email="wikus.jvr6@icloud.com">wikusjvr</maintainer>
+
+
+  <license>MIT</license>
+
+
+  <url type="website">http://github.com/wik46</url> 
+
+<!-- My package is going to contain source code written in cpp-->
+     <build_depend>roscpp</build_depend> 
+     <exec_depend>roscpp</exec_depend> 
+<!-- The package is going to publish on a topic that sends geometry_msgs--> 
+    <build_depend>geometry_msgs</build_depend> 
+    <exec_depend>geometry_msgs</exec_depend> 
+<!-- Our subscriber node subscribes to the turtlesim/pose topic-->
+    <build_depend>turtlesim</build_depend>
+    <exec_depend>turtlesim</exec_depend>
+
+ <!-- We make use of teh catkin build system-->
+    <buildtool_depend>catkin</buildtool_depend>
+
+</package>

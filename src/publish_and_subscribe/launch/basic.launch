@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!-- By default, a roslaunch will only launch one terminal window
+		we need the argument \xterm -e' -->
+	<!-- This launches the turtlesim gui-->
+	<node
+		pkg="turtlesim"
+		type="turtlesim_node"
+		name="turtle1"
+		respawn="true"
+	>
+	</node>
+	<!-- This launches my publisher program that moves the turtle-->
+	<!-- required="true" means that if I kill that node, it will shutdown
+		all the other nodes launched by this file. -->
+	<node
+		pkg="publish_and_subscribe"
+		type="pub_out"
+		name="Launched_pub_out"
+		output="screen"
+		required="true"
+		launch-prefix="xterm -e"
+	></node>
+	<!-- This launches my subcriber node that wil subscribe to the turtle/cmd_vel
+		topic. -->
+	<node
+		pkg="publish_and_subscribe"
+		type="sub_in"
+		name="launched_sub_in"
+		output="screen"
+		launch-prefix="xterm -e"
+	></node>
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name>wikus_tutorial</name>
+  <version>0.0.0</version>
+  <description>The wikus_tutorial package</description>
+
+  <maintainer email="wikusjvr@todo.todo">wikusjvr</maintainer>
+  <license>TODO</license>
+
+<!-- Only code needed for the simple publisher program.-->
+	<!-- a. We need this because we want a cpp compiler--> 
+     <build_depend>roscpp</build_depend> 
+     <exec_depend>roscpp</exec_depend> 
+ 
+	<!-- b.) Because our program will publish (send data) in the from of geometry_msgs/Twist-->
+     <build_depend>geometry_msgs</build_depend> 
+     <exec_depend>geometry_msgs</exec_depend>
+
+	<!-- This is because we make use of the catkin build system-->
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

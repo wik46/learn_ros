@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+
+<!-- Every launch file must start with this tag-->
+<launch>
+	<!-- This argument will allow the user to decide wheter they want
+	 	to start the node that allows them to change the color
+		of the world after launch.
+	-->
+	<!-- Remember to use this argument launch the nodes as follows:
+		roslaunch package-name launch_file.launch argument-name:="arg-value"
+	     By default the user will not launch the world color changer node.
+	-->
+	<arg 
+		name="world_changer_node" 
+		default="0"
+	/>
+
+	<!-- The purpose of this launch file is to show how to 
+		launch a node and set specific parameters during the launch.
+	-->
+	<!--
+		pkg="package-name"
+		type="executable-name"
+		name="my_custom_new_node_name"
+		required="true" // Means that if the node shutsdown all other that
+				// was launched with this file shutsdown 
+	-->
+	<node
+		pkg="turtlesim"
+		type="turtlesim_node"
+		name="yellow_turtle"
+		respawn="true"
+	>
+		<!--This parameter tag inside the node allows me to set theparameter
+			of the node when I launch it.
+		 -->
+		<param name="background_b" value="0"/>
+		<param name="background_g" value="255"/>
+		<param name="background_r" value="255"/>
+	</node>
+	<!-- 2. I also want to launch my node that allows me to enter
+		the turtles movements as a commandline input.
+	-->
+	<node
+		pkg="example_publisher"
+		type="publish_velocity"
+		name="pub_velocity_new_name"
+		required="true"
+		launch-prefix="xterm -e"
+	></node>
+	
+	<!-- This wil allow me to pass in an argument when launching the nodes.
+		The user can decide wheter to launch the nodes with the option
+		to change the color of the world as well.
+	-->
+	
+	<group if="$(arg world_changer_node)">
+		<node
+			pkg="parameters_example"
+			type="parameter_ex1"
+			name="world_color_changer"
+		></node>
+	</group>
+
+	
+</launch>

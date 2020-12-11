@@ -1,0 +1,24 @@
+Author: Wikus Jansen van Rensburg
+Date: December 5, 2020
+Description: This is readme file that I wrote while studying the basics
+		of Ros. Ros has a steap learning curve due to the
+		unclear decriptions. I used the textbook "A Gentle Introduction to Ros"
+
+
+=================================================================================
+How to move the ur10 arm with gazebo.
+=================================================================================
+
+1. Launch the gazebo simulator with an empty world.
+* roslaunch gazebo_ros empty_world.launch
+
+2. Insert the ur10 arm using the gazebo gui.
+
+3. Open a new terminal window and search for the topics that are being published.
+*  Remember if a node publishes on a topic, then it send data to all the
+	nodes that subsribe to this topic.
+* rostopic list.
+
+4. We see that there is a gazebo/set_link_state topic that looks very promising.
+*  Run rqt_graph in the command line and untick the debug mode to see how these nodes
+	sent and receive data from each other.

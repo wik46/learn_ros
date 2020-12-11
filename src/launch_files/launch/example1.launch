@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Author: Wikus Jansen van Resnburg
+	Description: Launch files are used to launch various nodes at once.
+			roslaunch will start rosmaster if it is not started
+			but if rosmaster is running it will just continue.
+	Date: December 8, 2020
+-->
+<!-- This directory is used to study all the various aspects of launch files.-->
+
+
+<!-- First part of a launch file is to tell turn it into a launch file by adding
+	the launch tags.-->
+
+<!-- 
+	Direction for use: If you just launch this file without specifying any arguments
+			   it will only start the rostmaster but not start any nodes.
+			   Because the default value for the conditional statment 	
+			   is set to zero. If you want to start the group of nodes
+			   you should start launch the file
+				* roslaunch launch_files example1.launch launch_type:="1"
+
+-->
+<launch>
+	<!-- This is so that I can configure my roslaunch
+	     Now if I launch these nodes like so
+			: roslaunch package-name launch_file.launch arg-name:=arg-value
+	-->
+	<arg
+		name="launch_type"
+		default="0"
+	/>
+
+	<!-- The purpose of the group tag is the group my nodes together.-->
+	<!-- $(arg arg-name) is now used as a variable. I can specify the value 
+		in the command line when I launch the file.
+	-->
+	<!-- The if statement works just as you aspect. If I launch to file and
+		pass the argument zero, then all the nodes inside the group tag
+		will not get launched. This is a way of configuring my launch file.
+	-->
+	<group if="$(arg launch_type)">
+		<!-- If a pass the argument 0 we launch this node. -->
+		<node
+			pkg="turtlesim"
+			type="turtlesim_node"
+			name="my_first_turtle"
+			respawn="true"
+		></node>
+		<node
+			pkg="turtlesim"
+			type="turtle_teleop_key"
+			name="my_custom_teleop"
+			required="true"
+			output="screen"
+			launch-prefix="xterm -e"
+		></node>
+	</group>
+	<!-- This is the end of my first group of nodes.-->
+</launch>
