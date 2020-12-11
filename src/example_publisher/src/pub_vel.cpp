@@ -51,7 +51,7 @@ int main(int argc, char** argv){
 	// This is only so that I can see how to publish.
 	std::cout << "Enter the velocity:";
 	std::cin >> msg.linear.x; // 
-	std::cout << "Enter the angle tow turn ( -1 to 1):";
+	std::cout << "Enter the angle two turn ( -1 to 1):";
 	std::cin >> msg.angular.z; // 
 	// Here we publish the message to the topic 'turtle1/cmd_vel'
 	pub.publish(msg);

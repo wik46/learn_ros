@@ -45,11 +45,18 @@ void get_subscriber_data(const gazebo_msgs::LinkStates& ls)
 {
 //	ROS_INFO_STREAM("Name: " << ls.name);
 	// This is data inside the gazebo_msgs::LinkState instance.
-	ROS_INFO_STREAM("geometry_msgs::Point.x" << ls.twist[0].linear.x);
-//			ls.geometry_msgs::Pose.x);
+	ROS_INFO_STREAM(	
+		" *obj.twist[0].linear.x: " << ls.twist[0].linear.x << '\n'
+	<<	" *obj.pose[0].position.x" << ls.pose[0].position.x << '\n'
+
+
+	);
 }
 
+
 /*
+	Subcribing to the topic:
+	The message (data type): gazebo_msgs/LinkStates 
 	Structure of the mesagee type .
 		- string[] name
 		- geometry_msgs/Pose[]
