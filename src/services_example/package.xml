@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>services_example</name>
+  <version>0.0.0</version>
+  <description>The services_example package</description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
+  <!-- Example:  -->
+  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
+  <maintainer email="wikusjvr@todo.todo">wikusjvr</maintainer>
+
+
+  <license>MIT</license>
+
+
+
+
+  <build_depend>roscpp</build_depend> 
+  <exec_depend>roscpp</exec_depend>
+    <!-- 1. you must declae all the packages that are used by the package.-->
+  <build_depend>turtlesim</build_depend> 
+  <exec_depend>turtlesim</exec_depend>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+</package>
