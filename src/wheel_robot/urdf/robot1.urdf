@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Author: WIkus Jansen van Rensburg
+	Date: December 16, 2020.
+	description: Studying how to design a urdf file to use
+			for simulating the robot.
+	Learning Resource:  Learning Ros for Robotic programming.
+-->
+
+<!-- This is a description of a robot with 4 wheels and an arm to
+	used alongside it.	
+-->
+
+<!-- Any robot that is simulated is associated with a urdf file. Ther
+	is two parts to the urdf file.
+	1. The links: The physical part.
+	2. The joint: The joints between the links.
+-->
+
+<!-- Part 1: All the joints. -->
+<!--  Format of the urdf links:
+	<link>
+		<visual>	
+		</visual>
+		<inertial>
+		</inertial>
+		<>
+	</link>
+
+-->
+
+
+<robot name="robot1">
+	<!--=================================================================== -->
+	<!-- Part 1: Links of the robot.-->
+	<!--=================================================================== -->
+	<!-- Base of my robot. -->
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size="0.2 0.3 0.1"/>
+			</geometry>
+			<!-- 
+				
+			-->
+			<origin rpy="0 0 0" xyz="0 0 0.05"/>
+			<material name="white">
+				<color rgba="1 1 1 1"/>
+			</material>
+		</visual>
+	</link>
+	<!-- 1. Wheel 1-->
+	<link name="wheel_1">
+		<visual>
+			<!-- part a. -->
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<!-- part b. -->
+			<origin rpy="0 1.5 0" xyz="-0.1 0.1 0"/>
+			<!-- part c.-->
+		<!--	<material name="black">
+				<color rgba="1 0 0 0"/>
+			</material> -->
+		</visual>
+	</link>
+	<!-- 2. Wheel 2-->
+	<link name="wheel_2">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="0.1 0.1 0"/>
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!-- 3. Wheel 3-->
+	<link name="wheel_3">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="0.1 -0.1 0" />
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!-- 4. Wheel 4-->
+	<link name="wheel_4">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!--=================================================================== -->
+	<!-- Part 2: All the links. -->
+	<!--=================================================================== -->
+	<!-- 1. Joint 1. (We can set the joint up to fixed, revolute, continuous)
+	-->
+	<joint name="base_to_wheel_1" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_1"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 2. Joint 2 -->
+	<joint name="base_to_wheel_2" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_2"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 3. Joint 3 -->
+	<joint name="base_to_wheel_3" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_3"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 4. Joint 4-->
+	<joint name="base_to_wheel_4" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_4"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+</robot>

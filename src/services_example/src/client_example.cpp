@@ -30,8 +30,6 @@
 #include <ros/ros.h>
 // 1. This is the service message type that we wil use.
 #include <turtlesim/Spawn.h>
-// 2. This is the second type of service message we wil use.
-#include <turtlesim/Kill.h>
 // This is to use cout and cin.
 #include <iostream>
 

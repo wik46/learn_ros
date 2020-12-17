@@ -8,19 +8,17 @@
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="wikusjvr@todo.todo">wikusjvr</maintainer>
-
-
   <license>MIT</license>
-
-
-
 
   <build_depend>roscpp</build_depend> 
   <exec_depend>roscpp</exec_depend>
     <!-- 1. you must declae all the packages that are used by the package.-->
   <build_depend>turtlesim</build_depend> 
   <exec_depend>turtlesim</exec_depend>
-  
+  <!-- 2. This is the second package needed by my package. -->
+  <build_depend>geometry_msgs</build_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <!-- 3. This is the build tool used by the program. -->
   <buildtool_depend>catkin</buildtool_depend>
 
 

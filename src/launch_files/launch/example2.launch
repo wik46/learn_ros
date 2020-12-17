@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!-- This is another file used to sudy how to use the various components
+	of a launch file.
+-->
+
+<!-- Firstly we define the launch file tags. -->
+<launch>
+	<!-- The name can be used to launch the nodes spcified in the commandline. -->
+	<arg name="which_launch" default="0">
+
+	<!-- a. This node will always start with this launch file. -->
+	<!-- I am launching the node that is used to display the turtle. -->
+	<node
+		pkg="turtlesim"
+		type="turtlesim_node"
+		name="my_custom_turtle_world"
+		respawn="true"
+	></node>
+
+	<!-- This tag lets me group the following nodes together. If a specify a "0"
+		for the argument, then I will not start these nodes defined inside
+		the group tag.
+	-->
+	<group if="$(arg which_launch) ">
+		<!-- I. This is the first node that wil start.-->
+		<node
+			pkg="turtlesim"
+			type="turtle_keyboard_teleop"
+			name="keyboard_movements"
+			required="true"
+		></node>
+		
+	</group>
+
+
+</launch>
