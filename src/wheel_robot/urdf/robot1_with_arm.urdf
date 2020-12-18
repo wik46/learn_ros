@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Author: WIkus Jansen van Rensburg
+	Date: December 16, 2020.
+	description: Studying how to design a urdf file to use
+			for simulating the robot.
+	Learning Resource:  Learning Ros for Robotic programming.
+-->
+
+<!-- This is a description of a robot with 4 wheels and an arm to
+	used alongside it.	
+-->
+
+<!-- Any robot that is simulated is associated with a urdf file. Ther
+	is two parts to the urdf file.
+	1. The links: The physical part.
+	2. The joint: The joints between the links.
+-->
+
+<!-- Part 1: All the joints. -->
+<!--  Format of the urdf links:
+	<link>
+		<visual>	
+		</visual>
+		<inertial>
+		</inertial>
+		<>
+	</link>
+
+-->
+
+
+<robot name="robot1">
+	<!--=================================================================== -->
+	<!-- Part 1: Links of the robot.-->
+	<!--=================================================================== -->
+	<!-- Base of my robot. -->
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size="0.2 0.3 0.1"/>
+			</geometry>
+			<!-- 
+				
+			-->
+			<origin rpy="0 0 0" xyz="0 0 0.05"/>
+			<material name="white">
+				<color rgba="1 1 1 1"/>
+			</material>
+		</visual>
+	</link>
+
+	<!-- The four wheels of the robot.-->
+	<!-- 1. Wheel 1-->
+	<link name="wheel_1">
+		<visual>
+			<!-- part a. -->
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<!-- part b. -->
+			<origin rpy="0 1.5 0" xyz="-0.1 0.1 0"/>
+			<!-- part c.-->
+		<!--	<material name="black">
+				<color rgba="1 0 0 0"/>
+			</material> -->
+		</visual>
+	</link>
+	<!-- 2. Wheel 2-->
+	<link name="wheel_2">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="0.1 0.1 0"/>
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!-- 3. Wheel 3-->
+	<link name="wheel_3">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="0.1 -0.1 0" />
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!-- 4. Wheel 4-->
+	<link name="wheel_4">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.05"/>
+			</geometry>
+			<origin rpy="0 1.5 0" xyz="-0.1 -0.1 0"/>
+		<!--	<material name="black"/> -->
+		</visual>
+	</link>
+	<!-- ********************************************* -->
+	<!-- The links that form part of the robot arm-->
+	<!-- 1. This is the base where the arm is set to the robot. -->
+	<!-- ********************************************* -->
+	<link name="arm_base">
+		<visual>
+			<geometry>
+		-->		<!-- Specifies the dimenstion of the box-->
+			<box size="0.01 0.1 0.1"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0.1"/>
+		<!--    <material name="black"/>-->	
+		</visual>
+	</link>
+	<!-- 2. The bottom half of the arm. -->
+	<link name="arm_1">
+		<visual>
+			<geometry>
+				<box size="0.05 0.05 0.5"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0 0 0.25"/>	
+		<!--    <material name="black"/> -->
+		</visual>
+	</link>
+	<!-- 2. The top half of the arm. -->
+	<link name="arm_2">
+		<visual>
+			<geometry>
+				<box size="0.05 0.05 0.5"/>
+			</geometry>
+			<origin rpy="0 0 0" xyz="0.06 0 0.15"/>
+		<!--    <material name black/>-->
+		</visual>
+	</link>
+	<!-- *************************************************** -->
+	<!-- The following links make up the endeffector-->
+	<!-- *************************************************** -->
+	<!-- In the previous link tags we made use of the basic
+		geometric shapes provided to us.
+		Now we make use of what is called meshes to display the
+		shapes of out robot.
+	-->
+
+	<link name="right_gripper">
+		<geometry>
+			<mesh filename="package://wheel_robot/meshes/gripper_v0/l_finger.stl"/>
+		</geometry>
+		<origin rpy="-3.1415 0 0" xyz="0 0 0"/>
+	</link>
+	
+	<link name="right_tip">
+		<geometry>
+			<mesh filename="package://wheel_robot/meshes/gripper_v0/l_finger_tip.stl"/>
+		</geometry>
+		<origin rpy="-3.1415 0 0" xyz="0.09137 0.00495 0"/>	
+	</link>
+<!--
+	<link name="left_gripper">
+		<geometry>
+		</geometry>
+		<origin/>
+	</link>
+	<link name="left_tip">
+		<visual>
+			<geometry>
+			</geometry>
+			<origin/>
+		</visual>
+	</link>
+-->	
+	<!--===============================================================i
+	==== -->
+	<!-- Part 2: All the joints. -->
+	<!--=============================================================-->
+
+	<!-- ********************************************* -->
+	<!-- 
+	1. Joint 1. (We can set the joint up to fixed, revolute, continuous)
+	-->
+	<!-- ********************************************* -->
+	<joint name="base_to_wheel_1" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_1"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 2. Joint 2 -->
+	<joint name="base_to_wheel_2" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_2"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 3. Joint 3 -->
+	<joint name="base_to_wheel_3" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_3"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+	<!-- 4. Joint 4-->
+	<joint name="base_to_wheel_4" type="fixed">
+		<parent link="base_link"/>
+		<child link="wheel_4"/>
+		<origin xyz="0 0 0"/>
+	</joint>
+
+	<!-- Here is all the links that connects the joints of the 
+		arm.
+	-->
+	<!-- ********************************************* -->
+	<!-- This joints connects the base to the arm base.-->
+	<!-- ********************************************* -->
+	<joint name="base_to_arm_base" type="continuous">
+		<parent link="base_link"/>
+		<child link="arm_base"/>
+		<axis xyz="0 0 1"/>
+
+					
+		<origin xyz="0 0 0"/>
+	</joint> 
+	<!-- This joint connects the arm 1 to the base.-->
+	<joint name="arm1_to_arm_base" type="revolute">
+		<parent link="arm_base"/>
+		<child link="arm_1"/>
+		<axis xyz="1 0 0" />
+		<origin xyz="0 0 0.15"/>
+		<limit effort="1000.0" 
+			lower="-1.0" 
+			upper="1.0"
+			velocity="0.5"
+		/>
+		
+	</joint>
+	<!-- This joint connect arm_1 with arm_2-->
+	<joint name="arm_2_to_arm_1" type="revolute">
+	<!-- Revolute and contious joints are very similar
+		The only difference is that the continuous joints
+		dont have limits such as the revilute joint.
+	-->	
+		<parent link="arm_1"/>
+		<child link="arm_2"/>
+		<axis xyz="1 0 0"/>
+		<origin xyz="0 0 0.45"/>
+		<!-- If you specify a revolute joints, you need to
+		add the limits of that joints,-->
+		<limit effort="1000.0" 
+			lower="-2.5" 
+			upper="2.5"
+			velocity="0.5"
+		/>
+	</joint>
+	<!-- The following joints all have to do with the endeffector.-->
+	<joint name="right_gripper_joint" type="revolute">
+		<parent link="arm_2"/>
+		<child link="right_gripper"/>
+		<axis xyz="0 0 -1"/>
+		<limit 
+			effort="1000"
+			lower="0.0"
+			upper="0.548"
+			velocity="0.5"
+		/>
+		<origin rpy="0 -1.57 0" xyz="0.06 0 0.4"/>
+	</joint>
+	<joint name="right_tip_joint" type="fixed">
+		<parent link="right_gripper"/>
+		<child link="right_tip"/>
+	</joint>
+
+</robot>	

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<!-- =================================================================== -->
+<!-- 
+	This is part one of the launch files needed to visualize the
+	urdf in ros. See part 2, for the rest of the code needed
+	to visualize out robot in rviz.
+-->
+<!-- =================================================================== -->
+
+
+<!-- This launch/ directory wil contain various different luanch files
+	to visualize the mr_1920_rover_arm using rviz.	
+-->
+	<!-- 
+	Parameters: 
+		- In addition to messages in ros, we have 
+		  another way of gaining information
+		  of nodes via parameters. The idea is that there 
+		  is one centralized parameter server keeping track 
+		  of a collection of values 
+		- integers, floats, strings - all represented by a 
+		  short string.
+		- Parameters are used for configurations where the value
+		  of the parmeter does not change (much).
+		* We can set the parameters from the commandline 
+		  using the 'rosparam'
+		  tool, or we can launch the nodes with 
+		  specified parameters.
+	-->
+
+
+	<!-- Setting Parameters:
+	An example of a parameter is the background_color_b parameter
+	used by the turtlesim node to set the background 
+	color of the turtlesim world.
+
+	Example of setting a parameter:
+	<param name="parameter-name" value="parameter-value"/>	
+
+	-->
+<launch>
+	<arg name="db" default="false"/>
+	<arg name="debug" default="false"/>
+
+	<!-- 2. This starts the joint_publisher which allows 
+		us to publish values.-->
+	<!-- Remember with the node tag that 'pkg' specifies 
+		the package where
+		the node is defined. 
+		The 'name' element is one we can choose and then
+		use to reference the node after it started.
+	-->
+	<!-- This only adds to small gui so that you can change the
+		the joint states. Becuase for this launch we only
+		want to visualize the robot and we dont mind setting the
+			joint states ourselves.
+	-->	
+	<!--	<param name="use_gui" default="TRUE"/> --> 
+	<!-- 3.  Allows us to publish the tf (transforms of the robot)-->
+	<!-- 
+		pkg="package-name"
+		type="executable-name"
+	-->
+
+
+  <!-- This tag acts as a type of variable that we can set when launching
+	all the nodes. At the end of the roslaunch command we need
+	to add model:="robot_file.urdf" where robot_file.urdf is
+	our description of our robot.
+	-->	
+  <arg name="model" />
+  <!-- Here we specify the configuration of how to start the rviz node.
+	Think of this as starting the rviz node just as like
+	your saved it the previous time you worked on the robot.
+  -->
+	
+  <!-- Here we load our robot_file.urdf to the parameter server. Now
+	the parameter server knows how our robot is defined so that any
+	node that is interested in knowing how our robot looks can access
+	the data. In this example the rviz node can now display out robot.
+  -->
+  <param 
+	name="robot_description" 
+	textfile="$(arg model)"/>
+
+  <node 
+	name="joint_state_publisher" 
+	pkg="joint_state_publisher_gui" 
+	type="joint_state_publisher_gui" />
+  <node 
+	name="robot_state_publisher" 
+	pkg="robot_state_publisher" 
+	type="state_publisher" />
+  <node 
+	name="rviz" 
+	pkg="rviz" 
+	type="rviz" 
+	args="-d $(find rviz_visual)/rviz/urdf.rviz" 
+	required="true" />
+
+</launch>

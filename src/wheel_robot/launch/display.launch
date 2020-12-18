@@ -9,12 +9,20 @@
 		to launch from the commandline using model:="robot-name"
 	-->
 	<arg name="model"/>
+	<!-- We start rviz without debug mode becuase it is very slow-->
+	<arg name="db" default="false"/>
+	<arg name="debug" default="false"/>
+
 	<!-- Here we load our urdf file to the parameter server. -->
 	<param 
 		name="robot_description" 
 		textfile="$(arg model)"/>
 
 	<!-- We launch three different nodes-->
+	<!-- Remember to install the joint-state-publisher-gui package.-->
+	<!-- Use the following command:	
+		< sudo apt-get install ros-(ros_distro)-joint-state-publisher-gui >
+	-->
 	<node 
 		pkg="joint_state_publisher_gui"
 		name="joint_state_publisher" 
@@ -27,6 +35,7 @@
 		name="robot_state_publisher"
 	/>
 	<!-- Third node that we launch -->
+	<!-- The last element is the configuration file for rviz.-->
 	<node 
 		pkg="rviz"
 		type="rviz"
