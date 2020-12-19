@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- 
+<!--	
 	Author: WIkus Jansen van Rensburg
 	Date: December 16, 2020.
 	description: Studying how to design a urdf file to use
@@ -27,7 +27,6 @@
 		</inertial>
 		<>
 	</link>
-
 -->
 
 
@@ -153,20 +152,38 @@
 		</geometry>
 		<origin rpy="-3.1415 0 0" xyz="0.09137 0.00495 0"/>	
 	</link>
-<!--
+
 	<link name="left_gripper">
 		<geometry>
+			<mesh
+			filename="package://wheel_robot/meshes/gripper_v0/l_finger.stl"/>
 		</geometry>
-		<origin/>
+		<!-- This tag specifies the origin of the co-ordinate frame
+			of the link. It is very import for us to know the exact position
+			of links relative to any other link and the orientation of the link.
+			rpy: The orientation of the co-cordinate frame.
+			xyz: The position of the origin of the co-ordinate frame.
+			Both are 3d vectors.
+		-->
+		<origin
+			rpy="0 0 0"
+			xyz="0 0 0"
+		/>
 	</link>
 	<link name="left_tip">
 		<visual>
 			<geometry>
+				<mesh
+				filename="package://wheel_robot/meshes/gripper_v0/l_finger_tip.stl"
+				/>
 			</geometry>
-			<origin/>
+			<origin
+				xyz="0 0 0"
+				rpy="0 0.09137 0.00495" 
+			/>
 		</visual>
 	</link>
--->	
+
 	<!--===============================================================i
 	==== -->
 	<!-- Part 2: All the joints. -->
@@ -259,9 +276,35 @@
 		/>
 		<origin rpy="0 -1.57 0" xyz="0.06 0 0.4"/>
 	</joint>
+	<!-- This is still part of the right gripper-->
 	<joint name="right_tip_joint" type="fixed">
 		<parent link="right_gripper"/>
 		<child link="right_tip"/>
 	</joint>
 
+	<!-- This forms part of the left gripper -->
+	<joint name="left_gripper_joint" type="revolute">
+		<parent link="arm_2"/>
+		<child link="left_gripper"/>
+		<!-- This joint has these extra tags because it is a joint
+			that can move and we set the limits of the joint.
+		-->
+		<axis xyz="0 0 1"/>
+		<!-- These are 4 types of limits we set on the joints of the arm.-->
+		<limit
+			effort="1000"
+			lower="0"
+			upper="0.548"
+			velocity="0.5"
+		/>
+		<origin
+			rpy="0 -1.57 0"
+			xyz="0.06 0 0.4"
+		/>
+	</joint>
+
+	<joint name="left_tip_joint" type="fixed">
+		<parent link="left_gripper"/>
+		<child link="left_tip"/>
+	</joint>
 </robot>	
