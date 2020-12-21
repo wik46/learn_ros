@@ -19,13 +19,29 @@
 -->
 
 <!-- Part 1: All the joints. -->
+<!-- We get three main types of joints that we specify:
+	continuous: The joints move with any limits.
+	revolute: Exactly like continuous but the joints have specified limits.
+	fixed: The joints cannot move.
+     * Remember that any type of joint has at least a parent link an a child link.
+	All the links must be joined by at least one joint.
+	You only have one root link.		
+	Use check_urdf to see how you links and joints are combined.
+-->
+
+<!-- This urdf file is only used for visualization in rviz and not for simulation using gazebo.
+	Therefore inside the link tags we only specify the visualization elements and not the
+	inertial and collition elements. The last two are need when simulating a robot in gazebo
+	or when running the software on an actual robot.
+-->
 <!--  Format of the urdf links:
 	<link>
 		<visual>	
 		</visual>
 		<inertial>
 		</inertial>
-		<>
+		<collition>
+		</collition>
 	</link>
 -->
 
@@ -189,29 +205,25 @@
 	<!-- Part 2: All the joints. -->
 	<!--=============================================================-->
 
-	<!-- ********************************************* -->
-	<!-- 
-	1. Joint 1. (We can set the joint up to fixed, revolute, continuous)
-	-->
-	<!-- ********************************************* -->
+	<!-- 1. Joint 1. (We can set the joint up to fixed, revolute, continuous) -->
 	<joint name="base_to_wheel_1" type="fixed">
 		<parent link="base_link"/>
 		<child link="wheel_1"/>
 		<origin xyz="0 0 0"/>
 	</joint>
-	<!-- 2. Joint 2 -->
+	<!-- 2. Joint 2 ***************************************************** -->
 	<joint name="base_to_wheel_2" type="fixed">
 		<parent link="base_link"/>
 		<child link="wheel_2"/>
 		<origin xyz="0 0 0"/>
 	</joint>
-	<!-- 3. Joint 3 -->
+	<!-- 3. Joint 3 ***************************************************** -->
 	<joint name="base_to_wheel_3" type="fixed">
 		<parent link="base_link"/>
 		<child link="wheel_3"/>
 		<origin xyz="0 0 0"/>
 	</joint>
-	<!-- 4. Joint 4-->
+	<!-- 4. Joint 4 ***************************************************** -->
 	<joint name="base_to_wheel_4" type="fixed">
 		<parent link="base_link"/>
 		<child link="wheel_4"/>
@@ -224,6 +236,7 @@
 	<!-- ********************************************* -->
 	<!-- This joints connects the base to the arm base.-->
 	<!-- ********************************************* -->
+	<!-- 5 Joint 5 ***************************************************** -->
 	<joint name="base_to_arm_base" type="continuous">
 		<parent link="base_link"/>
 		<child link="arm_base"/>
@@ -233,6 +246,7 @@
 		<origin xyz="0 0 0"/>
 	</joint> 
 	<!-- This joint connects the arm 1 to the base.-->
+	<!-- 6. Joint 6 ***************************************************** -->
 	<joint name="arm1_to_arm_base" type="revolute">
 		<parent link="arm_base"/>
 		<child link="arm_1"/>
@@ -246,6 +260,7 @@
 		
 	</joint>
 	<!-- This joint connect arm_1 with arm_2-->
+	<!-- 7. Joint 7 ***************************************************** -->
 	<joint name="arm_2_to_arm_1" type="revolute">
 	<!-- Revolute and contious joints are very similar
 		The only difference is that the continuous joints
@@ -264,6 +279,7 @@
 		/>
 	</joint>
 	<!-- The following joints all have to do with the endeffector.-->
+	<!-- 8. Joint 8 ***************************************************** -->
 	<joint name="right_gripper_joint" type="revolute">
 		<parent link="arm_2"/>
 		<child link="right_gripper"/>
@@ -277,12 +293,14 @@
 		<origin rpy="0 -1.57 0" xyz="0.06 0 0.4"/>
 	</joint>
 	<!-- This is still part of the right gripper-->
+	<!-- 9. Joint 9 ***************************************************** -->
 	<joint name="right_tip_joint" type="fixed">
 		<parent link="right_gripper"/>
 		<child link="right_tip"/>
 	</joint>
 
 	<!-- This forms part of the left gripper -->
+	<!-- 10. Joint 10 ***************************************************** -->
 	<joint name="left_gripper_joint" type="revolute">
 		<parent link="arm_2"/>
 		<child link="left_gripper"/>
@@ -303,6 +321,7 @@
 		/>
 	</joint>
 
+	<!-- 11. Joint 11 ***************************************************** -->
 	<joint name="left_tip_joint" type="fixed">
 		<parent link="left_gripper"/>
 		<child link="left_tip"/>
